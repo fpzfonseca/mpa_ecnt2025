@@ -2,7 +2,7 @@
 title: "Curso Intensivo sobre o Sistema Quarto, Linguagem R e o tidyverse"
 subtitle: "Econometria Aplicada à Finanças"
 lang: pt-BR
-author: "Seu Nome"
+author: "Felipe Fonseca"
 date: 2025-08-25
 format: 
   html:
@@ -406,19 +406,19 @@ median(numerico)
 
 ```{r} 
 # calcula os quartis
-quantile(x, probs = c(0, 0.25, 0.5, 0.75, 1))
+quantile(numerico, probs = c(0, 0.25, 0.5, 0.75, 1))
 ```
 
 
 ```{r}
 # calcula os decis
-quantile(x, probs = seq(0, 1, 0.1))
+quantile(numerico, probs = seq(0, 1, 0.1))
 ```
 
 
 ```{r}
 # calcula os percentis
-quantile(x, probs = seq(0, 1, 0.01))
+quantile(numerico, probs = seq(0, 1, 0.01))
 ```
 
 
@@ -746,17 +746,15 @@ nrow(df)
 
 ```{r}
 # função que exibe o número de colunas
-ncol(df)      
+ncol(df)   
 ```
-
-
 
 Podemos indexar (acessar ou selecionar) diferentes elementos de uma data frame 
 usando as seguintes sintaxes:
 
 ```{r}
 # seleciona uma coluna pelo nome
-df$idade      
+df$idade
 ```
 
 

@@ -1,0 +1,491 @@
+---
+title: "Atividade 1"
+subtitle: "Econometria Aplicada à Finanças"
+lang: pt-BR
+author: "Felipe Fonseca"
+date: 2025-09-01
+format: 
+  html:
+    theme: flatly
+    embed-resources: true
+    toc: true
+    number-sections: true
+execute:
+  echo: true
+  message: false
+  warning: false
+editor: source
+---
+
+# Exercício 1
+
+## Sistema Quarto no RStudio
+
+### a) Criação do documento
+
+`mkdir -p relatorio/testes/02-teste`
+
+O arquivo foi criado em `relatorio/testes/02-teste/02-teste.qmd` utilizando o comando `mkdir` acima.
+
+### b) Cabeçalho do documento
+
+-   **Autor:** Felipe Luiz Fonseca\
+-   **Data:** 01/09/2025\
+-   **Título:** Relatório do Exercício 1 – Sistema Quarto no RStudio
+
+### c) Apresentação
+
+> Eu sou **Felipe Fonseca**, graduado em **Estatística**. Tenho interesse em **Análise de Dados** e estou iniciando meus estudos no mestrado em Administração pelo IFMG.
+
+> Nesta disciplina espero aprender a produzir relatórios reprodutíveis, melhorar minhas habilidades de programação em R e dominar a geração automática de documentos em HTML e PDF com Quarto, utilizando essas ferramentas na Econometria Aplicada à Finanças.
+
+### d) Cálculos com vetor `idades`
+
+```{r}
+idades <- c(20, 22, 19, 23)
+idades
+```
+
+Média das idades
+
+```{r}
+media_idades <- mean(idades)
+media_idades
+```
+
+Menor idade
+
+```{r}
+menor_idade <- min(idades)
+menor_idade
+```
+
+Maior idade
+
+```{r}
+maior_idade <- max(idades)
+maior_idade
+```
+
+# Exercício 2
+
+## Tipos Atômicos de Dados
+
+### a. Crie e exiba os valores das seguintes variáveis:
+
+```{r}
+preco_acao <- 37.85
+quantidade_monitorada <- 1200000
+empresa_analisada <- 'XYZ'
+liquidez_diaria_alta <- TRUE
+
+# exibindo os valores
+preco_acao 
+quantidade_monitorada
+empresa_analisada
+liquidez_diaria_alta
+```
+
+### b. Verifique o **tipo interno** e a **classe** de cada uma das variáveis
+
+criadas.
+
+```{r}
+# preço da ação
+typeof(preco_acao)   # "double"
+class(preco_acao)    # "numeric"
+```
+
+```{r}
+# quantidade monitorada
+typeof(quantidade_monitorada)   # "double" (R armazena números como double por padrão)
+class(quantidade_monitorada)    # "numeric"
+```
+
+```{r}
+# nome da empresa
+typeof(empresa_analisada)       # "character"
+class(empresa_analisada)        # "character"
+```
+
+```{r}
+# liquidez alta
+typeof(liquidez_diaria_alta)    # "logical"
+class(liquidez_diaria_alta)     # "logical"
+```
+
+### c. Calcule o valor total de mercado estimado das ações monitoradas,
+
+multiplicando `preco_acao` pela `quantidade_monitorada`. Armazene o resultado no objeto `valor_mercado`.
+
+```{r}
+valor_mercado <- preco_acao * quantidade_monitorada
+valor_mercado
+```
+
+### e. Crie um vetor chamado `retornos_diarios` com os seguintes cinco
+
+valores fictícios, representando os retornos (%) da ação nos últimos cinco pregões: `1.20, -0.85, 0.43, 1.10, -0.25`
+
+```{r}
+# vetor de retornos (%)
+retornos_diarios <- c(1.20, -0.85, 0.43, 1.10, -0.25)
+
+# soma dos retornos
+soma_retornos <- sum(retornos_diarios)
+
+# média dos retornos
+media_retornos <- mean(retornos_diarios)
+
+# mediana dos retornos
+mediana_retornos <- median(retornos_diarios)
+
+# quartis (Q1, Q2/mediana, Q3)
+quartis_retornos <- quantile(retornos_diarios, probs = c(0.25, 0.5, 0.75))
+
+# variância (amostral)
+variancia_retornos <- var(retornos_diarios)
+
+# desvio padrão (amostral)
+desvio_padrao_retornos <- sd(retornos_diarios)
+
+# exibir resultados
+list(
+  soma = soma_retornos,
+  media = media_retornos,
+  mediana = mediana_retornos,
+  quartis = quartis_retornos,
+  variancia = variancia_retornos,
+  desvio_padrao = desvio_padrao_retornos
+)
+```
+
+# Exercício 3
+
+## Operações Matemáticas/Estatístics Vetoriais
+
+### a. Crie um vetor chamado `notas` com os valores: 7.5, 8.0, 6.5, 9.0, 5.5.
+
+```{r}
+notas <- c(7.5,8,6.5,9,5.5)
+notas
+```
+
+### b. Calcule a soma, média, mediana, variância e desvio padrão do vetor `notas`.
+
+```{r}
+soma_notas          <- sum(notas)          # soma
+media_notas         <- mean(notas)         # média
+mediana_notas       <- median(notas)       # mediana
+variancia_notas     <- var(notas)          # variância
+desvio_padrao_notas <- sd(notas)           # desvio padrão
+```
+
+### c. Calcule a soma acumulada e o produto acumulado do vetor `notas`.
+
+```{r}
+soma_acumulada   <- cumsum(notas)   # vetor de somas acumuladas
+produto_acumulado<- cumprod(notas)   # vetor de produtos acumulados
+```
+
+### d. Encontre o valor mínimo e máximo do vetor `notas`.
+
+```{r}
+valor_minimo <- min(notas)   # mínimo
+valor_maximo <- max(notas)   # máximo
+```
+
+### e. Calcule os quartis, decis e percentis do vetor `notas`.
+
+```{r}
+# Quartis (Q1, Q2/mediana, Q3)
+quartis  <- quantile(notas, probs = c(0.25, 0.50, 0.75))
+
+# Decis (10% a 90% em passos de 10%)
+decis    <- quantile(notas, probs = seq(0.1, 0.9, by = 0.1))
+
+# Percentis (1% a 99% em passos de 1%)
+percentis <- quantile(notas, probs = seq(0.01, 0.99, by = 0.01))
+```
+
+### Todos os resultados:
+
+```{r}
+# -------------------------------------------------
+# Exibir os resultados
+list(
+  soma               = soma_notas,
+  media              = media_notas,
+  mediana            = mediana_notas,
+  variancia          = variancia_notas,
+  desvio_padrao      = desvio_padrao_notas,
+  soma_acumulada     = soma_acumulada,
+  produto_acumulado  = produto_acumulado,
+  minimo             = valor_minimo,
+  maximo             = valor_maximo,
+  quartis            = quartis,
+  decis              = decis,
+  percentis          = percentis
+)
+```
+
+# Exercício 4 
+
+## Algebra Matricial Numérica
+
+### a. Crie uma matriz 2x3 chamada `A` com os valores: 1, 2, 3, 4, 5, 6.
+```{r}
+A <- matrix(c(1, 2, 3,
+              4, 5, 6),    # valores em ordem por coluna (padrão do R)
+            nrow = 2,
+            ncol = 3,
+            byrow = TRUE)   # preenche linha a linha
+A
+```
+
+### b. Crie uma matriz 3x2 chamada `B` com os valores: 2, 4, 1, 3, 5, 2.  
+```{r}
+B <- matrix(c(2, 4,
+              1, 3,
+              5, 2),          # valores em ordem por coluna
+            nrow = 3,
+            ncol = 2,
+            byrow = TRUE)
+B
+```
+
+### c. Calcule o resultado da multiplicação de `A` por `B`.  
+```{r}
+C <- A %*% B                # resultado da multiplicação matricial
+C
+```
+
+### d. Calcule a transposta de `A`.  
+```{r}
+At <- t(A)                  # função t() devolve a transposta
+At
+```
+
+### e. Calcule o determinante de `A`.  
+```{r}
+# O determinante só está definido para matrizes quadradas.
+# Como A é 2x3 (não quadrada), não há determinante.
+# Caso queira o determinante de uma submatriz quadrada:
+det_sub <- det(A[1:2, 1:2]) # exemplo usando a primeira submatriz 2x2
+det_sub
+```
+
+### f. Calcule a inversa de `A`. Pesquise e comente por que não é 
+recomendado utilizar a matriz inversa para resolver sistemas 
+lineares.
+```{r}
+# Matrizes não quadradas não possuem inversa geral.
+# Podemos calcular a pseudo‑inversa (Moore‑Penrose) com a função MASS::ginv().
+if (!requireNamespace("MASS", quietly = TRUE)) {
+    install.packages("MASS")
+}
+library(MASS)
+
+A_pinv <- ginv(A)           # pseudo‑inversa de A
+A_pinv
+
+# Comentário:
+# Não é recomendado usar a inversa (ou pseudo‑inversa) para resolver sistemas lineares
+# porque:
+# • O cálculo da inversa é numericamente instável quando a matriz está mal condicionada.
+# • É mais custoso computacionalmente (O(n³)) do que métodos diretos como eliminação de Gauss
+#   ou decomposição LU (O(n³) mas com melhor fatoramento e pivoteamento).
+# • Pequenos erros de arredondamento podem ser amplificados, produzindo soluções imprecisas.
+# Por isso as rotinas padrão `solve()` ou funções de decomposição são preferidas.
+```
+
+### g. Verifique se `A * A^(-1)` resulta na matriz identidade.
+```{r}
+I_approx <- A %*% A_pinv
+I_approx
+
+# Como A não é quadrada, o produto resultará em uma matriz identidade parcial
+# nas dimensões correspondentes (aproximação). Para matrizes quadradas,
+# `all.equal(I_approx, diag(nrow(A)))` pode ser usado para validar.
+```
+
+```{r}
+all.equal(I_approx, diag(nrow(A)))
+```
+
+# Exercício 5 
+
+## Data Frames e Tibbles
+
+### a. Crie um data frame chamado `funcionarios` com as colunas `nome` 
+(três nomes), `salario` (três valores numéricos) e `departamento` 
+(valores de texto) e exiba a data frame crida.
+```{r}
+# Vetores com os dados
+nome        <- c("Ana Silva", "Bruno Costa", "Carla Ramos")
+salario     <- c(3500, 4200, 3800)
+departamento<- c("Financeiro", "Recursos Humanos", "Marketing")
+
+# Data frame
+funcionarios <- data.frame(
+  nome        = nome,
+  salario     = salario,
+  departamento= departamento,
+  stringsAsFactors = FALSE   # evita conversão automática em fatores
+)
+
+funcionarios
+```
+
+### b. Converta `funcionarios` em uma tibble e a denomine `funcionarios_tb`, 
+exiba (imprima) a tibble, qual a diferença na exibição de uma data 
+frame e uma tibble?
+```{r}
+if (!requireNamespace("tibble", quietly = TRUE)) {
+  install.packages("tibble")
+}
+library(tibble)
+
+# Conversão
+funcionarios_tb <- as_tibble(funcionarios)
+
+funcionarios_tb
+```
+
+### c. Verifique quantas linhas e colunas a tibble possui com `nrow()` e `ncol()`.
+```{r}
+n_linhas <- nrow(funcionarios_tb)
+n_colunas <- ncol(funcionarios_tb)
+
+cat("Linhas:", n_linhas, "\n")
+cat("Colunas:", n_colunas, "\n")
+```
+
+
+### d. Extraia a segunda linha da tibble e salve em um objeto 
+chamado `segunda_linha`.  
+```{r}
+segunda_linha <- funcionarios_tb[2, ]   # ou slice(funcionarios_tb, 2)
+
+segunda_linha
+```
+
+# Exercício 6 
+
+## Manipulação de Dados com dplyr
+
+Você faz parte da equipe de análise de uma consultoria financeira. Seu 
+objetivo é extrair informações relevantes a partir de um conjunto de dados 
+com indicadores contábeis de empresas brasileiras de capital aberto. 
+
+Utilize os dados contidos no arquivo `dados/brutos/dados_simulados.csv` para 
+resolver os itens a seguir. 
+
+### a. Importe o arquivo de dados usando os pacotes here e readr e utilize a 
+função `glimpse()` para exibir a estrutura dos dados. Nomei o objeto 
+importado como `dados`.
+```{r}
+# Carregar pacotes necessários
+if (!requireNamespace("here",   quietly = TRUE)) install.packages("here")
+if (!requireNamespace("readr",  quietly = TRUE)) install.packages("readr")
+if (!requireNamespace("dplyr",  quietly = TRUE)) install.packages("dplyr")
+if (!requireNamespace("tibble", quietly = TRUE)) install.packages("tibble")
+
+library(here)
+library(readr)
+library(dplyr)
+library(tibble)
+
+dados <- read_csv(here("dados", "brutos", "dados_simulados.csv"))
+glimpse(dados)   # exibe a estrutura dos dados
+```
+
+
+### b. Como selecionar apenas as colunas: `empresa`, `setor`, `lucro_liquido`, 
+`valor_mercado`, `preco_acao`?
+```{r}
+dados_selecionados <- dados %>%
+  select(empresa,
+         setor,
+         lucro_liquido,
+         valor_mercado,
+         preco_acao)
+
+dados_selecionados
+```
+
+
+### c. Crie uma nova variável chamada `pl`, representando a razão Preço/Lucro 
+(P/L), utilizando a fórmula:
+
+$$
+\text{P/L} = \frac{\text{valor\_mercado}}{\text{lucro\_liquido}}
+$$
+
+**Obs.** Embora os dados contenham o preço da ação (`preco_acao`), o número 
+de ações em circulação não está explicitamente disponível. Por isso, usamos
+a valor de mercado.
+
+```{r}
+dados_com_pl <- dados %>%
+  mutate(pl = valor_mercado / lucro_liquido)
+
+dados_com_pl
+```
+
+### d. Filtre apenas as empresas do setor de **Tecnologia** e ordene essas 
+empresas da maior para a menor razão P/L.
+```{r}
+tecnologia_ordenada <- dados_com_pl %>%
+  filter(setor == "Tecnologia") %>%      # ou setor == "Tecnologia"
+  arrange(desc(pl))
+
+tecnologia_ordenada
+```
+
+### e. Crie três pipelines que calculem:
+
+- O lucro líquido médio por setor
+```{r}
+lucro_medio_por_setor <- dados_com_pl %>%
+  group_by(setor) %>%
+  summarise(lucro_liquido_medio = mean(lucro_liquido, na.rm = TRUE))
+
+lucro_medio_por_setor
+```
+
+- O valor de mercado total por setor
+```{r}
+valor_mercado_total_por_setor <- dados_com_pl %>%
+  group_by(setor) %>%
+  summarise(valor_mercado_total = sum(valor_mercado, na.rm = TRUE))
+
+valor_mercado_total_por_setor
+```
+
+- A quantidade de empresas em cada setor
+```{r}
+qtde_empresas_por_setor <- dados_com_pl %>%
+  group_by(setor) %>%
+  summarise(qtde_empresas = n())
+
+qtde_empresas_por_setor
+```
+
+### f. Crie uma nova variável chamada `eficiencia_mercado`, definida como o 
+quociente entre o valor de mercado e o ativo total. Em seguida, filtre as 
+empresas com `eficiencia_mercado > 1` e com ROE acima de de 10%.
+```{r}
+resultado_final <- dados_com_pl %>%
+  mutate(
+    eficiencia_mercado = valor_mercado / ativo_total,
+    roe = roe_percentual   # garante que a coluna exista; ajusta o nome se for diferente
+  ) %>%
+  filter(
+    eficiencia_mercado > 1,
+    roe > 10                # ROE acima de 10%
+  )
+
+resultado_final
+```
+
